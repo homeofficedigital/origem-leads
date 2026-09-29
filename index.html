@@ -47,7 +47,7 @@
   svg.i{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; flex:none; }
   .mono{ font-family:"Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric:tabular-nums; }
 
-  .shell{ max-width:1480px; margin:0 auto; padding:36px 32px 28px; }
+  .shell{ max-width:1700px; margin:0 auto; padding:36px 32px 28px; }
 
   /* Header */
   .top{ display:flex; justify-content:space-between; align-items:flex-end; gap:28px; flex-wrap:wrap; }
@@ -109,31 +109,36 @@
 
   /* Tabela */
   .sheet{ background:var(--surface); border:1px solid var(--line-strong); border-radius:18px; box-shadow:var(--shadow); overflow:hidden; }
-  .scroll{ overflow-x:auto; }
-  table{ width:100%; border-collapse:separate; border-spacing:0; min-width:1400px; }
+  .scroll{ overflow:auto; max-height:max(520px, calc(100vh - 150px)); overscroll-behavior-x:contain; scrollbar-width:thin; scrollbar-color:var(--line-strong) transparent; }
+  .scroll::-webkit-scrollbar{ height:10px; width:10px; }
+  .scroll::-webkit-scrollbar-thumb{ background:var(--line-strong); border-radius:99px; border:2px solid var(--surface); }
+  .scroll::-webkit-scrollbar-track{ background:transparent; }
+  table{ width:100%; min-width:var(--tw); table-layout:fixed; border-collapse:separate; border-spacing:0; }
+  :root{ --c0:56px; --c1:232px; --tw:1580px; }
   thead th{ background:var(--surface-2); text-align:left; font-size:12.5px; font-weight:600; padding:0; border-bottom:1px solid var(--line-strong); }
-  thead .letters th{ font-size:11px; font-weight:500; color:var(--faint); text-align:center; padding:6px 0; background:var(--zebra); border-bottom:1px solid var(--line); border-right:1px solid var(--line); }
-  thead .names th{ padding:13px 16px; border-right:1px solid var(--line); color:var(--text); white-space:nowrap; }
+  thead th{ position:sticky; z-index:5; }
+  thead .letters th{ top:0; height:26px; font-size:11px; font-weight:500; color:var(--faint); text-align:center; padding:0; background:var(--zebra); border-bottom:1px solid var(--line); border-right:1px solid var(--line); }
+  thead .names th{ top:26px; padding:13px 16px; border-right:1px solid var(--line); color:var(--text); white-space:nowrap; }
   thead th:last-child{ border-right:0 !important; }
-  thead th.rn{ padding:0 !important; width:52px; text-align:center; }
+  thead th.rn{ padding:0 !important; text-align:center; }
   .th-dot{ display:inline-block; width:8px; height:8px; border-radius:3px; margin-right:8px; vertical-align:1px; }
-  th.new{ position:relative; }
   th.new .nw{ margin-left:8px; font-size:10.5px; font-weight:600; color:var(--gold-ink); background:var(--gold-soft); border:1px solid var(--gold-line); padding:1px 7px; border-radius:999px; vertical-align:1px; }
   thead .letters th.new{ color:var(--gold-ink); }
 
   /* colunas fixas ao rolar */
   .stk1{ position:sticky; left:0; z-index:3; }
-  .stk2{ position:sticky; left:52px; z-index:2; }
-  thead .stk1, thead .stk2{ z-index:4; }
+  .stk2{ position:sticky; left:var(--c0); z-index:2; }
+  thead .stk1, thead .stk2{ z-index:7; }
   .scroll.scrolled .stk2{ box-shadow:6px 0 12px -8px rgba(0,0,0,.18); }
 
   td{ padding:0; border-bottom:1px solid var(--line); border-right:1px solid var(--line); font-size:14px; vertical-align:middle; transition:background-color .3s var(--ease), opacity .3s var(--ease); }
   td:last-child{ border-right:0; }
-  td.rn{ width:52px; text-align:center; font-size:12px; color:var(--faint); background:var(--zebra); }
+  td.rn{ text-align:center; font-size:12px; color:var(--faint); background:var(--zebra); }
   td .cell{ padding:13px 16px; display:flex; align-items:center; gap:10px; min-height:52px; }
   tr.row.alt td.data{ background:var(--zebra); }
 
-  td.origem{ background:var(--surface); cursor:pointer; width:220px; min-width:220px; max-width:220px; }
+  td.origem{ background:var(--surface); cursor:pointer; vertical-align:middle; }
+  td.origem .cell > span:last-child{ min-width:0; overflow-wrap:anywhere; }
   td.origem::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:transparent; transition:background-color .3s; }
   td.origem .cell{ padding:16px; gap:12px; }
   .o-ic{ width:38px; height:38px; border-radius:11px; background:var(--surface-2); display:grid; place-items:center; flex:none; transition:background-color .3s, color .3s; }
@@ -143,7 +148,7 @@
   .o-meta{ font-size:12px; color:var(--faint); margin-top:2px; }
   td.origem:hover .o-ic{ background:var(--green-soft); color:var(--green); }
 
-  td.meio{ width:34%; min-width:340px; }
+  td.meio .cell > span:last-child{ min-width:0; }
   td.meio .cell{ align-items:flex-start; }
   td.meio .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); flex:none; margin-top:7px; opacity:.8; }
   td.meio .m-top{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
@@ -152,7 +157,6 @@
   .compact td.meio .m-desc{ display:none; }
   .compact td.meio .cell{ align-items:center; }
   .compact td.meio .dot{ margin-top:0; }
-  td.temp{ width:108px; } td.dest{ width:180px; } td.links{ width:250px; min-width:250px; } td.utmc{ width:290px; min-width:290px; }
   td.links .cell, td.utmc .cell{ align-items:stretch; padding:11px 14px; }
 
   .t{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:500; padding:3px 9px; border-radius:999px; white-space:nowrap; }
@@ -171,7 +175,7 @@
 
   /* Links da jornada */
   .lk{ display:flex; flex-direction:column; gap:7px; width:100%; justify-content:center; }
-  .lk-row{ display:grid; grid-template-columns:56px 1fr; align-items:center; gap:8px; }
+  .lk-row{ display:grid; grid-template-columns:52px minmax(0,1fr); align-items:center; gap:8px; }
   .lk-row .k{ font-size:11px; color:var(--faint); font-weight:500; }
   .slot{ display:flex; align-items:center; gap:6px; border:1px dashed var(--line-strong); border-radius:8px; padding:4px 9px; color:var(--faint); font-size:12px; min-width:0; }
   .slot .i{ width:12px; height:12px; }
@@ -181,9 +185,9 @@
   .lk-a:hover{ border-color:var(--green); }
 
   /* UTM */
-  .utm{ position:relative; width:100%; border-radius:10px; padding:9px 11px; font-size:11.5px; line-height:1.55; display:grid; grid-template-columns:auto 1fr; gap:1px 10px; align-content:center; }
+  .utm{ position:relative; width:100%; min-width:0; border-radius:10px; padding:12px 34px 10px 11px; font-size:11.5px; line-height:1.55; display:grid; grid-template-columns:auto 1fr; gap:1px 10px; align-content:center; }
   .utm .k{ color:var(--faint); }
-  .utm .v{ color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .utm .v{ color:var(--text); overflow-wrap:anywhere; min-width:0; }
   .utm .v em{ font-style:normal; color:var(--gold-ink); }
   .utm .v.miss{ color:var(--faint); }
   .utm.sug{ border:1px dashed var(--gold-line); }
@@ -204,6 +208,37 @@
   .compact .utm .k{ display:none; }
   .compact .utm .v:not(:first-of-type){ display:none; }
 
+  /* Navegação lateral */
+  .sheet{ position:relative; }
+  .hnav{ display:none; align-items:center; gap:12px; padding:10px 12px 10px 16px; border-bottom:1px solid var(--line-strong); background:var(--surface); flex-wrap:wrap; }
+  .sheet.over .hnav{ display:flex; }
+  .hnav-hint{ display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--muted); white-space:nowrap; }
+  .hnav-hint .i{ width:16px; height:16px; color:var(--gold-ink); animation:nudge 1.6s var(--ease) infinite; }
+  @keyframes nudge{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(4px); } }
+  .jump{ display:flex; gap:4px; flex-wrap:wrap; }
+  .jump button{ border:1px solid var(--line-strong); background:var(--surface); border-radius:8px; padding:3px 9px; font-size:12px; font-weight:500; color:var(--muted); cursor:pointer; display:inline-flex; gap:6px; align-items:center; transition:all .3s var(--ease); }
+  .jump button .lt{ font-family:"Geist Mono",monospace; font-size:11px; color:var(--faint); }
+  .jump button:hover{ border-color:var(--green); color:var(--green-ink); }
+  .jump button.vis{ background:var(--green-soft); border-color:transparent; color:var(--green-ink); }
+  .jump button.vis .lt{ color:var(--green-ink); }
+  .jump button.new-col:not(.vis){ border-color:var(--gold-line); color:var(--gold-ink); }
+  .rail{ flex:1 1 160px; min-width:120px; height:8px; border-radius:99px; background:var(--surface-2); position:relative; cursor:pointer; }
+  .rail .thumb{ position:absolute; top:0; bottom:0; left:0; border-radius:99px; background:var(--green); cursor:grab; touch-action:none; transition:background-color .3s; }
+  .rail .thumb:active{ cursor:grabbing; }
+  .arrows{ display:flex; gap:4px; }
+  .arr{ width:32px; height:32px; border-radius:9px; border:1px solid var(--line-strong); background:var(--surface); display:grid; place-items:center; cursor:pointer; color:var(--text); transition:all .3s var(--ease); }
+  .arr:hover:not(:disabled){ border-color:var(--green); color:var(--green); }
+  .arr:disabled{ opacity:.35; cursor:default; }
+  .edge-fade{ position:absolute; bottom:0; width:56px; pointer-events:none; opacity:0; transition:opacity .3s; z-index:8; }
+  .edge-fade.r{ right:0; background:linear-gradient(90deg, transparent, var(--surface) 85%); border-radius:0 18px 18px 0; }
+  .edge-fade.l{ left:calc(var(--c0) + var(--c1)); background:linear-gradient(270deg, transparent, rgba(0,0,0,.06)); width:24px; }
+  .sheet.can-r .edge-fade.r, .sheet.can-l .edge-fade.l{ opacity:1; }
+  .edge-btn{ position:absolute; top:50%; width:40px; height:40px; margin-top:-20px; border-radius:50%; border:1px solid var(--line-strong); background:var(--surface); box-shadow:var(--shadow); display:grid; place-items:center; cursor:pointer; color:var(--green); z-index:9; opacity:0; pointer-events:none; transition:opacity .3s, transform .3s var(--ease); }
+  .edge-btn .i{ width:18px; height:18px; }
+  .edge-btn.r{ right:12px; } .edge-btn.l{ left:calc(var(--c0) + var(--c1) + 12px); }
+  .sheet.can-r .edge-btn.r, .sheet.can-l .edge-btn.l{ opacity:1; pointer-events:auto; }
+  .edge-btn:hover{ transform:scale(1.06); border-color:var(--green); }
+
   tr.group td{ background:var(--bg); border-bottom:1px solid var(--line-strong); }
   tr.group .g{ position:sticky; left:0; display:inline-flex; padding:18px 16px 8px; align-items:center; gap:10px; font-size:12.5px; color:var(--muted); font-weight:500; }
   tr.group .g b{ color:var(--text); font-weight:600; font-size:13.5px; }
@@ -223,8 +258,8 @@
   td.origem.sel::before{ background:var(--green); }
   td.origem.sel .o-ic{ background:var(--green); color:#fff; }
 
-  .enter{ animation:rowIn .3s var(--ease) both; }
-  @keyframes rowIn{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:none; } }
+  .enter{ animation:rowIn .3s var(--ease) backwards; }
+  @keyframes rowIn{ from{ opacity:0; } to{ opacity:1; } }
 
   .empty td{ border:0; }
   .empty .box{ position:sticky; left:0; width:min(100vw - 64px, 1400px); padding:56px 20px; text-align:center; color:var(--muted); font-size:14px; }
@@ -289,6 +324,7 @@
     .search{ flex:1 1 100%; }
     .view-toggle{ margin-left:0; }
     .stk2{ position:relative; left:auto; }
+    :root{ --c1:0px; }
     .compare, .params{ grid-template-columns:1fr; }
     .step{ grid-template-columns:30px 1fr; }
     .step .who{ grid-column:2; justify-self:start; }
@@ -342,11 +378,27 @@
     <span class="sel-tag" id="selTag"><span id="selName"></span><button id="selClear" aria-label="Limpar seleção"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
   </div>
 
-  <div class="sheet">
+  <div class="sheet" id="sheet">
+    <div class="hnav" id="hnav">
+      <span class="hnav-hint"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>A tabela continua para o lado. Role ou vá direto para a coluna:</span>
+      <div class="jump" id="jump"></div>
+      <div class="rail" id="rail" title="Arraste para rolar a tabela"><div class="thumb" id="thumb"></div></div>
+      <div class="arrows">
+        <button class="arr" id="arrL" aria-label="Rolar para a esquerda"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+        <button class="arr" id="arrR" aria-label="Rolar para a direita"><svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+      </div>
+    </div>
+    <div class="edge-fade l" id="fadeL"></div>
+    <div class="edge-fade r" id="fadeR"></div>
+    <button class="edge-btn l" id="btnL" aria-label="Ver colunas anteriores"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+    <button class="edge-btn r" id="btnR" aria-label="Ver mais colunas"><svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
     <div class="scroll" id="scroll">
       <table id="tbl">
+        <colgroup>
+          <col style="width:var(--c0)"><col style="width:var(--c1)"><col style="width:410px"><col style="width:122px"><col style="width:196px"><col style="width:262px"><col style="width:302px">
+        </colgroup>
         <thead>
-          <tr class="letters"><th class="rn stk1"></th><th class="stk2">A</th><th>B</th><th>C</th><th>D</th><th class="new">E</th><th class="new">F</th></tr>
+          <tr class="letters"><th class="rn stk1"></th><th class="stk2" data-col="A">A</th><th data-col="B">B</th><th data-col="C">C</th><th data-col="D">D</th><th class="new" data-col="E">E</th><th class="new" data-col="F">F</th></tr>
           <tr class="names">
             <th class="rn stk1">#</th>
             <th class="stk2"><span class="th-dot" style="background:var(--text)"></span>Origem</th>
@@ -391,7 +443,7 @@
   <div class="dests" id="dests"></div>
 
   <footer>
-    <div><b>Arquitetura de Aquisição HOD</b> • Versão 2.1 · Matriz + Guia de Origem + Rastreamento</div>
+    <div><b>Arquitetura de Aquisição HOD</b> • Versão 2.2 · Matriz + Guia de Origem + Rastreamento</div>
     <div>Base para o futuro dashboard de conversão (Origem → Ganho → Receita).</div>
   </footer>
 </div>
@@ -641,6 +693,7 @@
     $("summary").textContent = count ? plural(count,"caminho","caminhos")+" em "+plural(origens,"origem","origens")+(count<TODAS.length?" · de "+TODAS.length+" no total":"") : "";
     renderChips();
     applySel();
+    if(typeof updScroll==="function") requestAnimationFrame(updScroll);
   }
 
   /* ============ CHIPS DE FILTRO ============ */
@@ -778,7 +831,55 @@
   tb.addEventListener("mouseleave", function(){ setHover(null); });
   $("selClear").addEventListener("click", function(){ state.sel=null; applySel(); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape" && state.sel){ state.sel=null; applySel(); } });
-  $("scroll").addEventListener("scroll", function(){ this.classList.toggle("scrolled", this.scrollLeft>4); });
+  /* ============ NAVEGAÇÃO LATERAL ============ */
+  var sc = $("scroll"), sheet = $("sheet"), rail = $("rail"), thumb = $("thumb");
+  var COLS = [["B","Meio"],["C","Temperatura"],["D","Destino"],["E","Links"],["F","UTM"]];
+  $("jump").innerHTML = COLS.map(function(c){
+    return '<button data-c="'+c[0]+'" class="'+(c[0]==="E"||c[0]==="F"?"new-col":"")+'"><span class="lt">'+c[0]+'</span>'+c[1]+'</button>';
+  }).join("");
+  function fixo(){ var th = document.querySelector('th[data-col="A"]'); return getComputedStyle(th).position==="sticky" ? th.offsetLeft+th.offsetWidth : document.querySelector("thead th.rn").offsetWidth; }
+  function irPara(letra){
+    var th = document.querySelector('th[data-col="'+letra+'"]');
+    sc.scrollTo({ left: Math.max(0, th.offsetLeft - fixo()), behavior:"smooth" });
+  }
+  $("jump").addEventListener("click", function(e){ var b = e.target.closest("button"); if(b) irPara(b.getAttribute("data-c")); });
+  function passo(dir){ sc.scrollBy({ left: dir*Math.max(240,(sc.clientWidth-fixo())*0.7), behavior:"smooth" }); }
+  $("arrL").addEventListener("click", function(){ passo(-1); });
+  $("arrR").addEventListener("click", function(){ passo(1); });
+  $("btnL").addEventListener("click", function(){ passo(-1); });
+  $("btnR").addEventListener("click", function(){ passo(1); });
+  function updScroll(){
+    var max = sc.scrollWidth - sc.clientWidth, over = max > 2, x = sc.scrollLeft;
+    sheet.classList.toggle("over", over);
+    sheet.classList.toggle("can-l", over && x > 4);
+    sheet.classList.toggle("can-r", over && x < max - 4);
+    sc.classList.toggle("scrolled", x > 4);
+    $("arrL").disabled = !(x > 4); $("arrR").disabled = !(x < max - 4);
+    var hn = $("hnav").offsetHeight;
+    $("fadeR").style.top = $("fadeL").style.top = hn+"px";
+    $("btnL").style.top = $("btnR").style.top = "calc(50% + "+(hn/2)+"px)";
+    if(over){
+      var rw = rail.clientWidth, tw = Math.max(28, rw*sc.clientWidth/sc.scrollWidth);
+      thumb.style.width = tw+"px";
+      thumb.style.transform = "translateX("+((rw-tw)*(x/max))+"px)";
+      var f = fixo(), vis0 = x + f, vis1 = x + sc.clientWidth;
+      $("jump").querySelectorAll("button").forEach(function(b){
+        var th = document.querySelector('th[data-col="'+b.getAttribute("data-c")+'"]');
+        var a = th.offsetLeft, z = a + th.offsetWidth;
+        b.classList.toggle("vis", Math.min(z,vis1) - Math.max(a,vis0) > th.offsetWidth*0.6);
+      });
+    }
+  }
+  sc.addEventListener("scroll", updScroll, { passive:true });
+  rail.addEventListener("pointerdown", function(e){
+    var r = rail.getBoundingClientRect(), max = sc.scrollWidth - sc.clientWidth, tw = thumb.offsetWidth;
+    function mover(ev){ var p = Math.min(1, Math.max(0, (ev.clientX - r.left - tw/2)/(r.width - tw))); sc.scrollLeft = p*max; }
+    mover(e); rail.setPointerCapture && rail.setPointerCapture(e.pointerId);
+    function up(){ rail.removeEventListener("pointermove", mover); rail.removeEventListener("pointerup", up); }
+    rail.addEventListener("pointermove", mover); rail.addEventListener("pointerup", up);
+  });
+  if(window.ResizeObserver) new ResizeObserver(updScroll).observe(sc);
+  window.addEventListener("resize", updScroll);
 
   /* ============ FILTRO DE CANAL ============ */
   var seg = $("seg");
@@ -828,7 +929,8 @@
   }catch(e){}
   requestAnimationFrame(moveInd);
   window.addEventListener("resize", moveInd);
-  if(document.fonts && document.fonts.ready) document.fonts.ready.then(moveInd);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ moveInd(); updScroll(); });
+  requestAnimationFrame(updScroll);
 })();
 </script>
 </body>
