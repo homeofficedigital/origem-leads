@@ -6,13 +6,15 @@
 <title>Matriz de Origem de Leads · Home Office Digital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#FFFFFF; --surface:#FFFFFF; --zebra:#F8F9FA; --surface-2:#F3F4F5; --text:#2B2B2B; --muted:#6E7378; --faint:#A6ABB0;
     --line:#E9EBED; --line-strong:#DCDFE2;
     --green:#0E7A55; --green-soft:#EAF4EF; --green-softer:#F3F9F6; --green-ink:#0B6446;
     --gold:#C8A75A; --gold-soft:#FAF4E6; --gold-line:#EBDDB9; --gold-ink:#86692A;
+    --cold:#3C6FA8; --cold-soft:#E9F0F8; --warm:#B7791F; --warm-soft:#FBF2E2;
+    --hot:#C0503A; --hot-soft:#FBEAE6; --client:#6B4FA0; --client-soft:#F0EBF8;
     --shadow:0 1px 2px rgba(20,30,25,.04), 0 8px 24px rgba(20,30,25,.05);
     --ease:cubic-bezier(.22,.8,.26,1);
   }
@@ -22,6 +24,8 @@
       --line:#242B28; --line-strong:#2E3633;
       --green:#34A67C; --green-soft:rgba(52,166,124,.15); --green-softer:rgba(52,166,124,.07); --green-ink:#62C9A1;
       --gold:#D4B66C; --gold-soft:rgba(212,182,108,.12); --gold-line:rgba(212,182,108,.3); --gold-ink:#E2C888;
+      --cold:#7FAEE3; --cold-soft:#18263A; --warm:#E0A94F; --warm-soft:#2E2414;
+      --hot:#EC8570; --hot-soft:#361D18; --client:#B39AE6; --client-soft:#261F38;
       --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
     }
   }
@@ -30,42 +34,49 @@
     --line:#242B28; --line-strong:#2E3633;
     --green:#34A67C; --green-soft:rgba(52,166,124,.15); --green-softer:rgba(52,166,124,.07); --green-ink:#62C9A1;
     --gold:#D4B66C; --gold-soft:rgba(212,182,108,.12); --gold-line:rgba(212,182,108,.3); --gold-ink:#E2C888;
+    --cold:#7FAEE3; --cold-soft:#18263A; --warm:#E0A94F; --warm-soft:#2E2414;
+    --hot:#EC8570; --hot-soft:#361D18; --client:#B39AE6; --client-soft:#261F38;
     --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
   }
   :root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
   html{ scroll-padding-top:env(safe-area-inset-top,0px); }
   *,*::before,*::after{ box-sizing:inherit; }
-  body{ margin:0; background:var(--bg); color:var(--text); font-family:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; font-feature-settings:"tnum"; }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
   button, input{ font:inherit; color:inherit; }
   :focus-visible{ outline:2px solid var(--green); outline-offset:2px; border-radius:8px; }
   svg.i{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+  .mono{ font-family:"Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric:tabular-nums; }
 
-  .shell{ max-width:1180px; margin:0 auto; padding:36px 32px 28px; }
+  .shell{ max-width:1480px; margin:0 auto; padding:36px 32px 28px; }
 
   /* Header */
-  .top{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; }
+  .top{ display:flex; justify-content:space-between; align-items:flex-end; gap:28px; flex-wrap:wrap; }
   .brand{ display:flex; align-items:center; gap:10px; font-weight:600; font-size:14.5px; letter-spacing:-.01em; }
   .brand-mark{ width:28px; height:28px; border-radius:8px; background:var(--green); display:grid; place-items:center; }
   .brand-mark span{ width:8px; height:8px; border-radius:50%; background:var(--gold); }
   .brand small{ color:var(--muted); font-weight:500; }
   h1{ font-size:clamp(26px,3.2vw,38px); line-height:1.1; letter-spacing:-.035em; font-weight:600; margin:24px 0 8px; }
-  .subtitle{ margin:0; color:var(--muted); font-size:15.5px; line-height:1.5; max-width:60ch; }
-  .stats{ display:flex; gap:28px; }
+  .subtitle{ margin:0; color:var(--muted); font-size:15.5px; line-height:1.55; max-width:64ch; }
+  .stats{ display:flex; gap:28px; align-items:flex-end; flex-wrap:wrap; }
   .stat .v{ font-size:26px; font-weight:600; letter-spacing:-.03em; line-height:1; }
   .stat .l{ font-size:12.5px; color:var(--muted); margin-top:6px; }
-  .stat.gold .v{ color:var(--gold-ink); }
-  .stat.green .v{ color:var(--green); }
+  .stat.green .v{ color:var(--green); } .stat.gold .v{ color:var(--gold-ink); }
+  .stat.prog{ min-width:160px; }
+  .stat.prog .v small{ font-size:15px; color:var(--muted); font-weight:500; }
+  .bar{ height:5px; border-radius:99px; background:var(--surface-2); margin-top:8px; overflow:hidden; }
+  .bar i{ display:block; height:100%; min-width:3px; background:var(--green); border-radius:99px; transition:width .6s var(--ease); }
+  .bar.gold i{ background:var(--gold); }
 
   /* Toolbar */
-  .toolbar{ display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; margin:30px 0 14px; }
+  .toolbar{ display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; margin:30px 0 12px; }
   .segmented{ position:relative; display:inline-flex; padding:4px; gap:2px; background:var(--surface-2); border-radius:12px; overflow-x:auto; max-width:100%; scrollbar-width:none; }
   .segmented::-webkit-scrollbar{ display:none; }
   .seg-ind{ position:absolute; top:4px; bottom:4px; left:0; border-radius:9px; background:var(--surface); box-shadow:0 1px 2px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.05); transition:transform .3s var(--ease), width .3s var(--ease); }
   .seg-btn{ position:relative; z-index:1; border:0; background:none; cursor:pointer; padding:7px 14px; border-radius:9px; font-size:13.5px; font-weight:500; color:var(--muted); display:flex; align-items:center; gap:7px; white-space:nowrap; transition:color .3s; }
   .seg-btn .i{ width:15px; height:15px; }
   .seg-btn[aria-pressed="true"], .seg-btn:hover{ color:var(--text); }
-  .search{ position:relative; flex:0 1 320px; min-width:220px; }
-  .search .i{ position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--faint); }
+  .search{ position:relative; flex:0 1 340px; min-width:220px; }
+  .search > .i{ position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--faint); }
   .search input{ width:100%; height:40px; border:1px solid var(--line-strong); background:var(--surface); border-radius:12px; padding:0 36px 0 38px; font-size:14px; transition:border-color .3s, box-shadow .3s; }
   .search input::placeholder{ color:var(--faint); }
   .search input:focus{ outline:none; border-color:var(--green); box-shadow:0 0 0 4px var(--green-soft); }
@@ -73,89 +84,214 @@
   .search-clear.show{ display:grid; }
   .search-clear:hover{ background:var(--surface-2); }
 
-  .status{ display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:30px; margin-bottom:10px; font-size:13px; color:var(--muted); }
+  .filters2{ display:flex; align-items:center; gap:10px 22px; flex-wrap:wrap; margin-bottom:14px; }
+  .fgroup{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .fgroup > span.lb{ font-size:12.5px; color:var(--muted); margin-right:4px; }
+  .fchip{ border:1px solid var(--line-strong); background:var(--surface); border-radius:999px; padding:4px 11px 4px 9px; font-size:12.5px; font-weight:500; cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:var(--muted); transition:all .3s var(--ease); }
+  .fchip .c{ font-size:11px; color:var(--faint); }
+  .fchip::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--dot, var(--faint)); }
+  .fchip:hover{ border-color:var(--faint); color:var(--text); }
+  .fchip[aria-pressed="true"]{ background:var(--soft); border-color:var(--dot); color:var(--dot); }
+  .fchip[aria-pressed="true"] .c{ color:inherit; opacity:.7; }
+  .view-toggle{ margin-left:auto; display:inline-flex; gap:2px; padding:3px; background:var(--surface-2); border-radius:10px; }
+  .view-toggle button{ border:0; background:none; padding:5px 11px; border-radius:8px; font-size:12.5px; font-weight:500; color:var(--muted); cursor:pointer; transition:all .3s; }
+  .view-toggle button[aria-pressed="true"]{ background:var(--surface); color:var(--text); box-shadow:0 1px 2px rgba(0,0,0,.06); }
+
+  .legend{ display:flex; gap:8px 22px; flex-wrap:wrap; font-size:12.5px; color:var(--muted); padding:12px 16px; background:var(--zebra); border:1px solid var(--line); border-radius:12px; margin-bottom:12px; line-height:1.5; }
+  .legend b{ font-weight:600; }
+
+  .status{ display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:30px; margin-bottom:10px; font-size:13px; color:var(--muted); flex-wrap:wrap; }
   .sel-tag{ display:inline-flex; align-items:center; gap:8px; background:var(--green-soft); color:var(--green-ink); padding:5px 6px 5px 12px; border-radius:999px; font-weight:500; opacity:0; transform:translateY(-2px); transition:opacity .3s, transform .3s; pointer-events:none; }
   .sel-tag.show{ opacity:1; transform:none; pointer-events:auto; }
-  .sel-tag button{ border:0; background:var(--surface); width:22px; height:22px; border-radius:50%; display:grid; place-items:center; cursor:pointer; color:var(--green-ink); }
+  .sel-tag.gold{ background:var(--gold-soft); color:var(--gold-ink); }
+  .sel-tag button{ border:0; background:var(--surface); width:22px; height:22px; border-radius:50%; display:grid; place-items:center; cursor:pointer; color:inherit; }
   .sel-tag button .i{ width:12px; height:12px; }
 
   /* Tabela */
   .sheet{ background:var(--surface); border:1px solid var(--line-strong); border-radius:18px; box-shadow:var(--shadow); overflow:hidden; }
   .scroll{ overflow-x:auto; }
-  table{ width:100%; border-collapse:separate; border-spacing:0; min-width:680px; }
-  thead th{ position:sticky; top:0; background:var(--surface-2); text-align:left; font-size:12.5px; font-weight:600; color:var(--muted); padding:0; border-bottom:1px solid var(--line-strong); }
+  table{ width:100%; border-collapse:separate; border-spacing:0; min-width:1400px; }
+  thead th{ background:var(--surface-2); text-align:left; font-size:12.5px; font-weight:600; padding:0; border-bottom:1px solid var(--line-strong); }
   thead .letters th{ font-size:11px; font-weight:500; color:var(--faint); text-align:center; padding:6px 0; background:var(--zebra); border-bottom:1px solid var(--line); border-right:1px solid var(--line); }
-  thead .letters th:last-child{ border-right:0; }
-  thead .names th{ padding:13px 18px; border-right:1px solid var(--line); color:var(--text); }
-  thead .names th:last-child{ border-right:0; }
-  thead .names th.rn, thead .letters th.rn{ padding:0; width:46px; text-align:center; }
+  thead .names th{ padding:13px 16px; border-right:1px solid var(--line); color:var(--text); white-space:nowrap; }
+  thead th:last-child{ border-right:0 !important; }
+  thead th.rn{ padding:0 !important; width:52px; text-align:center; }
   .th-dot{ display:inline-block; width:8px; height:8px; border-radius:3px; margin-right:8px; vertical-align:1px; }
+  th.new{ position:relative; }
+  th.new .nw{ margin-left:8px; font-size:10.5px; font-weight:600; color:var(--gold-ink); background:var(--gold-soft); border:1px solid var(--gold-line); padding:1px 7px; border-radius:999px; vertical-align:1px; }
+  thead .letters th.new{ color:var(--gold-ink); }
 
-  td{ padding:0; border-bottom:1px solid var(--line); border-right:1px solid var(--line); font-size:14px; vertical-align:middle; transition:background-color .3s var(--ease), opacity .3s var(--ease), color .3s; }
+  /* colunas fixas ao rolar */
+  .stk1{ position:sticky; left:0; z-index:3; }
+  .stk2{ position:sticky; left:52px; z-index:2; }
+  thead .stk1, thead .stk2{ z-index:4; }
+  .scroll.scrolled .stk2{ box-shadow:6px 0 12px -8px rgba(0,0,0,.18); }
+
+  td{ padding:0; border-bottom:1px solid var(--line); border-right:1px solid var(--line); font-size:14px; vertical-align:middle; transition:background-color .3s var(--ease), opacity .3s var(--ease); }
   td:last-child{ border-right:0; }
-  td.rn{ width:46px; text-align:center; font-size:11.5px; color:var(--faint); background:var(--zebra); }
-  td .cell{ padding:13px 18px; display:flex; align-items:center; gap:10px; min-height:50px; }
-  tr.row.alt td.meio, tr.row.alt td.dest{ background:var(--zebra); }
+  td.rn{ width:52px; text-align:center; font-size:12px; color:var(--faint); background:var(--zebra); }
+  td .cell{ padding:13px 16px; display:flex; align-items:center; gap:10px; min-height:52px; }
+  tr.row.alt td.data{ background:var(--zebra); }
 
-  /* Origem mesclada */
-  td.origem{ background:var(--surface); cursor:pointer; width:34%; position:relative; }
+  td.origem{ background:var(--surface); cursor:pointer; width:220px; min-width:220px; max-width:220px; }
   td.origem::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:transparent; transition:background-color .3s; }
-  td.origem .cell{ padding:16px 18px; gap:13px; }
+  td.origem .cell{ padding:16px; gap:12px; }
   .o-ic{ width:38px; height:38px; border-radius:11px; background:var(--surface-2); display:grid; place-items:center; flex:none; transition:background-color .3s, color .3s; }
   .o-ic .i{ width:18px; height:18px; }
   .o-nm{ font-weight:600; font-size:14.5px; letter-spacing:-.01em; line-height:1.3; }
-  .o-meta{ font-size:12.5px; color:var(--muted); margin-top:2px; }
+  .o-handle{ font-size:12px; color:var(--muted); margin-top:3px; }
+  .o-meta{ font-size:12px; color:var(--faint); margin-top:2px; }
   td.origem:hover .o-ic{ background:var(--green-soft); color:var(--green); }
 
-  td.meio .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); flex:none; opacity:.75; }
-  td.meio .txt{ font-weight:500; }
-  td.dest{ width:36%; }
-  .pill{ display:inline-flex; align-items:center; gap:7px; background:var(--gold-soft); color:var(--gold-ink); border:1px solid var(--gold-line); padding:4px 11px 4px 9px; border-radius:999px; font-size:13px; font-weight:500; }
-  .pill::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--gold); }
-  mark{ background:rgba(200,167,90,.28); color:inherit; border-radius:3px; padding:0 1px; }
+  td.meio{ width:34%; min-width:340px; }
+  td.meio .cell{ align-items:flex-start; }
+  td.meio .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); flex:none; margin-top:7px; opacity:.8; }
+  td.meio .m-top{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  td.meio .m-nm{ font-weight:600; font-size:14px; }
+  td.meio .m-desc{ color:var(--muted); font-size:13.5px; line-height:1.55; margin-top:4px; max-width:60ch; }
+  .compact td.meio .m-desc{ display:none; }
+  .compact td.meio .cell{ align-items:center; }
+  .compact td.meio .dot{ margin-top:0; }
+  td.temp{ width:108px; } td.dest{ width:180px; } td.links{ width:250px; min-width:250px; } td.utmc{ width:290px; min-width:290px; }
+  td.links .cell, td.utmc .cell{ align-items:stretch; padding:11px 14px; }
 
-  /* Grupo (faixa de canal) */
+  .t{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:500; padding:3px 9px; border-radius:999px; white-space:nowrap; }
+  .t::before{ content:""; width:7px; height:7px; border-radius:50%; background:currentColor; }
+  .t.frio{ color:var(--cold); background:var(--cold-soft); }
+  .t.morno{ color:var(--warm); background:var(--warm-soft); }
+  .t.quente{ color:var(--hot); background:var(--hot-soft); }
+  .t.cliente{ color:var(--client); background:var(--client-soft); }
+  .s{ display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:500; padding:2px 7px; border-radius:6px; white-space:nowrap; }
+  .s .i{ width:12px; height:12px; }
+  .s.ok{ color:var(--green-ink); background:var(--green-soft); }
+  .s.val{ color:var(--gold-ink); background:var(--gold-soft); }
+  .pill{ display:inline-flex; align-items:center; gap:7px; background:var(--gold-soft); color:var(--gold-ink); border:1px solid var(--gold-line); padding:4px 11px 4px 9px; border-radius:999px; font-size:13px; font-weight:500; }
+  .pill::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--gold); flex:none; }
+  mark{ background:rgba(200,167,90,.3); color:inherit; border-radius:3px; padding:0 1px; }
+
+  /* Links da jornada */
+  .lk{ display:flex; flex-direction:column; gap:7px; width:100%; justify-content:center; }
+  .lk-row{ display:grid; grid-template-columns:56px 1fr; align-items:center; gap:8px; }
+  .lk-row .k{ font-size:11px; color:var(--faint); font-weight:500; }
+  .slot{ display:flex; align-items:center; gap:6px; border:1px dashed var(--line-strong); border-radius:8px; padding:4px 9px; color:var(--faint); font-size:12px; min-width:0; }
+  .slot .i{ width:12px; height:12px; }
+  .lk-a{ display:flex; align-items:center; gap:6px; min-width:0; color:var(--green-ink); text-decoration:none; font-size:12px; background:var(--green-softer); border:1px solid var(--green-soft); border-radius:8px; padding:4px 9px; }
+  .lk-a span{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .lk-a .i{ width:12px; height:12px; }
+  .lk-a:hover{ border-color:var(--green); }
+
+  /* UTM */
+  .utm{ position:relative; width:100%; border-radius:10px; padding:9px 11px; font-size:11.5px; line-height:1.55; display:grid; grid-template-columns:auto 1fr; gap:1px 10px; align-content:center; }
+  .utm .k{ color:var(--faint); }
+  .utm .v{ color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .utm .v em{ font-style:normal; color:var(--gold-ink); }
+  .utm .v.miss{ color:var(--faint); }
+  .utm.sug{ border:1px dashed var(--gold-line); }
+  .utm.sug .v{ color:var(--muted); }
+  .utm.def{ background:var(--green-softer); border:1px solid var(--green-soft); }
+  .utm-tag{ position:absolute; top:-8px; right:10px; font-family:"Geist",sans-serif; font-size:10.5px; font-weight:600; padding:0 7px; border-radius:999px; line-height:16px; }
+  .utm.sug .utm-tag{ background:var(--surface); color:var(--gold-ink); border:1px solid var(--gold-line); }
+  .utm.def .utm-tag{ background:var(--green); color:#fff; }
+  tr.row.alt .utm.sug .utm-tag{ background:var(--zebra); }
+  .utm-copy{ position:absolute; bottom:6px; right:6px; width:24px; height:24px; border-radius:7px; border:1px solid var(--line); background:var(--surface); display:grid; place-items:center; cursor:pointer; color:var(--muted); opacity:0; transition:opacity .3s, color .3s; }
+  .utm-copy .i{ width:12px; height:12px; }
+  tr.row:hover .utm-copy, .utm-copy:focus-visible{ opacity:1; }
+  .utm-copy:hover{ color:var(--green); border-color:var(--green); }
+  .na{ width:100%; display:flex; gap:8px; align-items:flex-start; font-size:12.5px; color:var(--muted); line-height:1.5; background:var(--surface-2); border-radius:10px; padding:9px 11px; }
+  .na .i{ width:14px; height:14px; margin-top:2px; color:var(--faint); }
+  .na b{ color:var(--text); font-weight:600; display:block; font-size:12px; }
+  .compact .utm{ grid-template-columns:1fr; }
+  .compact .utm .k{ display:none; }
+  .compact .utm .v:not(:first-of-type){ display:none; }
+
   tr.group td{ background:var(--bg); border-bottom:1px solid var(--line-strong); }
-  tr.group .g{ padding:18px 18px 8px; display:flex; align-items:center; gap:10px; font-size:12.5px; color:var(--muted); font-weight:500; }
+  tr.group .g{ position:sticky; left:0; display:inline-flex; padding:18px 16px 8px; align-items:center; gap:10px; font-size:12.5px; color:var(--muted); font-weight:500; }
   tr.group .g b{ color:var(--text); font-weight:600; font-size:13.5px; }
   tr.group .g .i{ width:15px; height:15px; color:var(--green); }
-  tr.group:first-child .g{ padding-top:14px; }
 
-  /* Hover de linha */
-  tbody.hovering tr.row.hover td.meio, tbody.hovering tr.row.hover td.dest{ background:var(--green-soft); }
-  tbody.hovering tr.row.hover td.rn{ color:var(--green); font-weight:600; background:var(--green-soft); }
+  tbody.hovering tr.row.hover td.data{ background:var(--green-soft); }
+  tbody.hovering tr.row.hover td.rn{ color:var(--green); background:var(--green-soft); }
 
-  /* Seleção de origem */
-  tbody.has-sel tr.row td.meio, tbody.has-sel tr.row td.dest, tbody.has-sel tr.row td.origem, tbody.has-sel tr.row td.rn{ opacity:.32; }
+  tbody.has-sel tr.row td.data, tbody.has-sel tr.row td.rn, tbody.has-sel td.origem{ opacity:.3; }
   tbody.has-sel tr.row.sel td{ opacity:1; }
-  tbody.has-sel tr.row.sel td.meio, tbody.has-sel tr.row.sel td.dest{ background:var(--green-softer); }
-  tbody.has-sel tr.row.sel.hover td.meio, tbody.has-sel tr.row.sel.hover td.dest{ background:var(--green-soft); }
+  tbody.has-sel td.origem.live{ opacity:1; }
+  tbody.has-sel tr.row.sel td.data{ background:var(--green-softer); }
+  tbody.has-sel.sel-d tr.row.sel td.data{ background:var(--gold-soft); }
+  tbody.has-sel tr.row.sel.hover td.data{ background:var(--green-soft); }
   tbody.has-sel tr.row.sel td.rn{ color:var(--green); }
-  td.origem.sel{ background:var(--green-soft) !important; opacity:1 !important; }
+  td.origem.sel{ background:var(--green-soft) !important; }
   td.origem.sel::before{ background:var(--green); }
   td.origem.sel .o-ic{ background:var(--green); color:#fff; }
-  td.origem.sel .o-meta{ color:var(--green-ink); }
 
   .enter{ animation:rowIn .3s var(--ease) both; }
   @keyframes rowIn{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:none; } }
 
   .empty td{ border:0; }
-  .empty .box{ padding:56px 20px; text-align:center; color:var(--muted); font-size:14px; }
+  .empty .box{ position:sticky; left:0; width:min(100vw - 64px, 1400px); padding:56px 20px; text-align:center; color:var(--muted); font-size:14px; }
   .empty .box b{ display:block; color:var(--text); font-size:15px; font-weight:600; margin-bottom:6px; }
   .empty button{ margin-top:14px; border:1px solid var(--line-strong); background:var(--surface); border-radius:10px; padding:8px 14px; cursor:pointer; font-size:13px; font-weight:500; }
-  .empty button:hover{ border-color:var(--green); color:var(--green); }
 
-  footer{ margin-top:26px; padding-top:18px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 24px; font-size:12.5px; color:var(--muted); }
+  /* Seções */
+  .sec-h{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin:44px 0 14px; flex-wrap:wrap; }
+  .sec-h h2{ margin:0; font-size:19px; letter-spacing:-.02em; font-weight:600; display:flex; align-items:center; gap:10px; }
+  .sec-h h2 .nw{ font-size:11px; font-weight:600; color:var(--gold-ink); background:var(--gold-soft); border:1px solid var(--gold-line); padding:2px 8px; border-radius:999px; letter-spacing:0; }
+  .sec-h span{ font-size:12.5px; color:var(--muted); }
+
+  .why{ display:grid; grid-template-columns:1.1fr 1fr; gap:16px; }
+  .why-card{ background:var(--surface); border:1px solid var(--line-strong); border-radius:18px; padding:22px 24px; }
+  .why-card h3{ margin:0 0 6px; font-size:15px; font-weight:600; letter-spacing:-.01em; }
+  .why-card p{ margin:0; font-size:14px; color:var(--muted); line-height:1.6; }
+  .compare{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px; }
+  .compare div{ border-radius:12px; padding:12px 14px; font-size:13px; line-height:1.5; }
+  .compare .hoje{ background:var(--surface-2); color:var(--muted); }
+  .compare .depois{ background:var(--green-softer); border:1px solid var(--green-soft); color:var(--text); }
+  .compare small{ display:block; font-size:11.5px; font-weight:600; margin-bottom:4px; }
+  .compare .hoje small{ color:var(--faint); } .compare .depois small{ color:var(--green-ink); }
+  .params{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:16px; }
+  .param{ background:var(--zebra); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+  .param code{ font-family:"Geist Mono",monospace; font-size:12px; color:var(--green-ink); font-weight:500; }
+  .param b{ display:block; font-size:13px; font-weight:600; margin:6px 0 3px; }
+  .param p{ margin:0; font-size:12px; color:var(--muted); line-height:1.5; }
+  .example{ margin-top:14px; font-family:"Geist Mono",monospace; font-size:12px; line-height:1.7; background:var(--zebra); border:1px solid var(--line); border-radius:12px; padding:12px 14px; overflow-x:auto; white-space:nowrap; color:var(--muted); }
+  .example .h{ color:var(--text); } .example .p{ color:var(--green-ink); } .example em{ font-style:normal; color:var(--gold-ink); }
+  .steps{ display:grid; gap:10px; margin-top:16px; }
+  .step{ display:grid; grid-template-columns:30px 1fr auto; gap:12px; align-items:start; padding:12px 14px; border:1px solid var(--line); border-radius:12px; }
+  .step .n{ width:26px; height:26px; border-radius:8px; background:var(--green-soft); color:var(--green-ink); font-size:12.5px; font-weight:600; display:grid; place-items:center; }
+  .step b{ display:block; font-size:13.5px; font-weight:600; }
+  .step p{ margin:2px 0 0; font-size:12.5px; color:var(--muted); line-height:1.5; }
+  .step .who{ font-size:11.5px; color:var(--muted); background:var(--surface-2); padding:3px 9px; border-radius:999px; white-space:nowrap; }
+
+  .dests{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; }
+  .dcard{ text-align:left; cursor:pointer; background:linear-gradient(180deg,var(--gold-soft),var(--surface) 160%); border:1px solid var(--gold-line); border-radius:16px; padding:16px 18px; display:flex; flex-direction:column; gap:8px; transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s; }
+  .dcard:hover{ transform:translateY(-2px); box-shadow:var(--shadow); }
+  .dcard[aria-pressed="true"]{ border-color:var(--gold); box-shadow:0 0 0 4px var(--gold-soft); }
+  .dcard .top2{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+  .dcard b{ font-size:14.5px; font-weight:600; letter-spacing:-.01em; }
+  .dcard .n{ font-size:12.5px; color:var(--gold-ink); white-space:nowrap; }
+  .dcard p{ margin:0; font-size:13px; color:var(--muted); line-height:1.5; }
+  .dcard .temps{ display:flex; gap:4px; flex-wrap:wrap; margin-top:2px; }
+  .dcard .temps .t{ font-size:11px; padding:2px 7px; }
+
+  .toast{ position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translate(-50%,12px); background:var(--text); color:var(--bg); font-size:13px; font-weight:500; padding:9px 16px; border-radius:999px; opacity:0; pointer-events:none; transition:opacity .3s, transform .3s var(--ease); z-index:50; }
+  .toast.show{ opacity:1; transform:translate(-50%,0); }
+
+  footer{ margin-top:32px; padding-top:18px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 24px; font-size:12.5px; color:var(--muted); }
   footer b{ color:var(--text); font-weight:600; }
 
+  @media (max-width:1000px){
+    .why{ grid-template-columns:1fr; }
+    .params{ grid-template-columns:repeat(2,1fr); }
+  }
   @media (max-width:760px){
     .shell{ padding:24px 16px 20px; }
     .stats{ gap:20px; width:100%; }
     .stat .v{ font-size:22px; }
     .search{ flex:1 1 100%; }
-    td .cell{ padding:12px 14px; }
-    td.origem .cell{ padding:14px; }
-    .o-ic{ width:32px; height:32px; }
+    .view-toggle{ margin-left:0; }
+    .stk2{ position:relative; left:auto; }
+    .compare, .params{ grid-template-columns:1fr; }
+    .step{ grid-template-columns:30px 1fr; }
+    .step .who{ grid-column:2; justify-self:start; }
   }
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
@@ -169,20 +305,36 @@
     <div>
       <div class="brand"><div class="brand-mark" aria-hidden="true"><span></span></div><div>Home Office Digital <small>/ Comercial</small></div></div>
       <h1>Matriz de Origem de Leads</h1>
-      <p class="subtitle">Cada linha é um caminho de entrada do lead no ecossistema HOD: Origem → Meio → Objetivo/Destino.</p>
+      <p class="subtitle">Cada linha é um caminho de entrada: de onde o lead veio, o que fez antes de cair no funil, o quanto já conhece a HOD, qual é o nosso objetivo com ele e como vamos rastrear esse caminho até o CRM.</p>
     </div>
     <div class="stats" id="stats"></div>
   </header>
 
   <div class="toolbar">
-    <div class="segmented" role="group" aria-label="Filtrar por canal" id="seg">
-      <div class="seg-ind" id="segInd"></div>
-    </div>
+    <div class="segmented" role="group" aria-label="Filtrar por canal" id="seg"><div class="seg-ind" id="segInd"></div></div>
     <label class="search">
       <svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="Buscar meio de aquisição" autocomplete="off" aria-label="Buscar meio de aquisição">
+      <input id="q" type="search" placeholder="Buscar meio, contexto ou UTM" autocomplete="off" aria-label="Buscar">
       <button class="search-clear" id="qClear" aria-label="Limpar busca"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </label>
+  </div>
+
+  <div class="filters2">
+    <div class="fgroup" id="fTemp"><span class="lb">Temperatura</span></div>
+    <div class="fgroup" id="fStatus"><span class="lb">Descrição</span></div>
+    <div class="fgroup" id="fTrk"><span class="lb">Rastreamento</span></div>
+    <div class="view-toggle" role="group" aria-label="Modo de visualização">
+      <button data-v="det" aria-pressed="true">Detalhado</button>
+      <button data-v="comp" aria-pressed="false">Compacto</button>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><b style="color:var(--cold)">Frio</b>: nunca ouviu falar da HOD</span>
+    <span><b style="color:var(--warm)">Morno</b>: já consome conteúdo</span>
+    <span><b style="color:var(--hot)">Quente</b>: já conhece e voltou por conta própria</span>
+    <span><b style="color:var(--client)">Cliente</b>: já é aluno</span>
+    <span>UTM <b style="color:var(--gold-ink)">tracejada</b> é sugestão do padrão; <b style="color:var(--green-ink)">sólida</b> é a UTM oficial em uso</span>
   </div>
 
   <div class="status">
@@ -191,15 +343,18 @@
   </div>
 
   <div class="sheet">
-    <div class="scroll">
-      <table>
+    <div class="scroll" id="scroll">
+      <table id="tbl">
         <thead>
-          <tr class="letters"><th class="rn"></th><th>A</th><th>B</th><th>C</th></tr>
+          <tr class="letters"><th class="rn stk1"></th><th class="stk2">A</th><th>B</th><th>C</th><th>D</th><th class="new">E</th><th class="new">F</th></tr>
           <tr class="names">
-            <th class="rn"></th>
-            <th><span class="th-dot" style="background:var(--text)"></span>Origem</th>
-            <th><span class="th-dot" style="background:var(--green)"></span>Meio de aquisição</th>
+            <th class="rn stk1">#</th>
+            <th class="stk2"><span class="th-dot" style="background:var(--text)"></span>Origem</th>
+            <th><span class="th-dot" style="background:var(--green)"></span>Meio de aquisição e caminho esperado</th>
+            <th>Temperatura</th>
             <th><span class="th-dot" style="background:var(--gold)"></span>Objetivo / Destino</th>
+            <th class="new">Links da jornada<span class="nw">Novo</span></th>
+            <th class="new">UTM<span class="nw">Novo</span></th>
           </tr>
         </thead>
         <tbody id="tb"></tbody>
@@ -207,17 +362,46 @@
     </div>
   </div>
 
+  <!-- Rastreamento -->
+  <div class="sec-h"><h2>Rastreamento de origem <span class="nw">Proposta</span></h2><span>Por que as colunas E e F importam e como vamos preenchê-las</span></div>
+  <div class="why">
+    <div class="why-card">
+      <h3>Do caminho esperado ao caminho real</h3>
+      <p>A matriz já documenta como o lead deveria chegar. Com um link identificado e uma UTM em cada caminho, o CRM passa a registrar por onde cada lead de fato entrou. Isso é o que vai permitir medir, no futuro, Origem → Ganho → Receita.</p>
+      <div class="compare">
+        <div class="hoje"><small>Hoje</small>"Esse lead veio do Instagram."</div>
+        <div class="depois"><small>Com link + UTM</small>"Veio do ManyChat do perfil do Felipe, pela palavra-chave do post X, e caiu no Formulário 90 Dias."</div>
+      </div>
+      <div class="params" id="params"></div>
+      <div class="example" id="example"></div>
+    </div>
+    <div class="why-card">
+      <h3>Como vamos preencher</h3>
+      <p>Três etapas, cada uma com uma área responsável. As colunas se atualizam à medida que as informações chegarem.</p>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><div><b>Mapear os links</b><p>Para cada caminho, registrar o link de entrada (onde o lead clica: anúncio, bio, direct, descrição) e o link de destino (a página em que ele cai).</p></div><span class="who">Tráfego e Social</span></div>
+        <div class="step"><span class="n">2</span><div><b>Validar o padrão de UTM</b><p>Revisar a sugestão de cada linha, ajustar nomes e oficializar. Uma vez definido, o padrão não muda, para não quebrar o histórico.</p></div><span class="who">Tráfego e Dados</span></div>
+        <div class="step"><span class="n">3</span><div><b>Capturar a UTM no CRM</b><p>Garantir que formulários e landing pages gravem os parâmetros UTM no cadastro do lead. Indicação e Renovação são registradas por campo de origem no próprio CRM.</p></div><span class="who">CRM e Comercial</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Objetivos -->
+  <div class="sec-h"><h2>Objetivos</h2><span>Clique em um objetivo para destacar os caminhos que levam até ele</span></div>
+  <div class="dests" id="dests"></div>
+
   <footer>
-    <div><b>Arquitetura de Aquisição HOD</b> • Versão 1.1</div>
+    <div><b>Arquitetura de Aquisição HOD</b> • Versão 2.1 · Matriz + Guia de Origem + Rastreamento</div>
     <div>Base para o futuro dashboard de conversão (Origem → Ganho → Receita).</div>
   </footer>
 </div>
+<div class="toast" id="toast"></div>
 
 <script>
 (function(){
   "use strict";
 
-  /* ============ ÍCONES (inline, sem dependências) ============ */
+  /* ============ ÍCONES ============ */
   var IC = {
     todos:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
     instagram:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
@@ -225,140 +409,359 @@
     tiktok:'<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
     monetizacao:'<circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6.5v11"/>',
     indicacao:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/>',
-    renovacao:'<path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/>'
+    renovacao:'<path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/>',
+    check:'<path d="M20 6 9 17l-5-5"/>',
+    clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    link:'<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
+    ext:'<path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+    copy:'<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+    db:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+    minus:'<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>'
   };
-  function svg(name){ return '<svg class="i" viewBox="0 0 24 24">'+IC[name]+'</svg>'; }
+  function svg(n){ return '<svg class="i" viewBox="0 0 24 24">'+IC[n]+'</svg>'; }
 
-  /* ============ DADOS ============ */
+  /* ============ DADOS DA MATRIZ ============
+     Linha: [nº, meio, caminho esperado, temperatura, status da descrição, destino] */
   var CANAIS = [
     { id:"instagram", nome:"Instagram", origens:[
-      { id:"ig-fmbr", nome:"Instagram FelipeMarquesBR", icon:"instagram", linhas:[
-        ["Tráfego Novos Seguidores","Formulário Plano 90 Dias"],
-        ["Link Bio","Formulário Plano 90 Dias"],
-        ["Link Seguidor","Formulário Plano 90 Dias"],
-        ["ManyChat","Formulário Plano 90 Dias"],
-        ["Remarketing Instagram","Diagnóstico de Carreira"],
-        ["Campanha BORA","Landing BORA"]
+      { id:"ig-fmbr", nome:"Instagram FelipeMarquesBR", handle:"@felipemarquesbr", sub:"Perfil pessoal do Felipe", icon:"instagram", linhas:[
+        [1,"Tráfego Novos Seguidores","Anúncio pago rodando para quem ainda não conhece a HOD. O clique leva direto para o formulário do Plano 90 Dias.","frio","ok","Formulário Plano 90 Dias"],
+        [2,"Link Bio","Link fixo na bio do Felipe. A pessoa visitou o perfil, gostou do conteúdo e clicou por conta própria.","morno","ok","Formulário Plano 90 Dias"],
+        [3,"Link Seguidor","Quando alguém começa a seguir o Instagram, recebe automaticamente uma mensagem com o link do Plano. Acabou de chegar ao perfil.","frio","ok","Formulário Plano 90 Dias"],
+        [4,"ManyChat","Posts com chamada para comentar uma palavra. Quem comenta recebe o link do Plano no direct. Engajou com um conteúdo específico, vale saber qual post foi.","morno","ok","Formulário Plano 90 Dias"],
+        [5,"Remarketing Instagram","Anúncio pago para quem já teve contato com a HOD (seguiu, assistiu, interagiu). Leva para o Diagnóstico de Carreira.","morno","ok","Diagnóstico de Carreira"],
+        [6,"Campanha BORA","Tráfego pago da campanha BORA, com página própria. O lead chega pela Landing BORA.","frio","ok","Landing BORA"]
       ]},
-      { id:"ig-hod", nome:"Instagram Home Office Digital", icon:"instagram", linhas:[
-        ["Bio","Diagnóstico de Carreira"],
-        ["Bio","Formulário 90 Dias"],
-        ["ManyChat","Diagnóstico de Carreira"]
+      { id:"ig-hod", nome:"Instagram Home Office Digital", handle:"Home Office Digital", sub:"Perfil da marca", icon:"instagram", linhas:[
+        [7,"Bio","Link na bio do perfil da marca, levando para o Diagnóstico de Carreira.","morno","val","Diagnóstico de Carreira"],
+        [8,"Bio","Segundo link na bio do perfil da marca, levando para o formulário do Plano 90 Dias.","morno","val","Formulário Plano 90 Dias"],
+        [9,"ManyChat","Mesma lógica do perfil do Felipe: comentou no post e recebeu o link no direct, aqui apontando para o Diagnóstico.","morno","val","Diagnóstico de Carreira"]
       ]},
-      { id:"ig-fmhod", nome:"Instagram FelipeMarquesHOD", icon:"instagram", linhas:[
-        ["Bio","Diagnóstico"],
-        ["ManyChat","Diagnóstico"]
+      { id:"ig-fmhod", nome:"Instagram FelipeMarquesHOD", handle:"@felipemarqueshod", sub:"Perfil secundário", icon:"instagram", linhas:[
+        [10,"Bio","Link na bio do perfil, levando para o Diagnóstico.","morno","val","Diagnóstico de Carreira"],
+        [11,"ManyChat","Comentou numa postagem desse perfil e recebeu o link do Diagnóstico no direct.","morno","val","Diagnóstico de Carreira"]
       ]}
     ]},
     { id:"youtube", nome:"YouTube", origens:[
-      { id:"youtube", nome:"YouTube", icon:"youtube", linhas:[
-        ["Tráfego Novos Inscritos","Inscrição no Canal"],
-        ["Remarketing","Diagnóstico"],
-        ["Legenda dos Vídeos","Diagnóstico"],
-        ["Comentários Fixados","Curso Grátis"],
-        ["Shorts Orgânicos","Diagnóstico"],
-        ["Vídeos Longos","Diagnóstico"]
+      { id:"youtube", nome:"YouTube", handle:"Canal HOD", sub:"", icon:"youtube", linhas:[
+        [12,"Tráfego Novos Inscritos","Anúncio pago para ganhar inscritos no canal. O objetivo é audiência, não lead direto: essa pessoa ainda vai passar pelos outros caminhos do YouTube.","frio","val","Inscrição no Canal"],
+        [13,"Remarketing","Anúncio para quem já assistiu ou interagiu com o canal. Leva para o Diagnóstico.","morno","val","Diagnóstico de Carreira"],
+        [14,"Legenda dos Vídeos","Link na descrição dos vídeos. Assistiu um vídeo e foi atrás do link.","morno","val","Diagnóstico de Carreira"],
+        [15,"Comentários Fixados","Link no comentário fixado dos vídeos, oferecendo o Curso Grátis.","morno","val","Curso Grátis"],
+        [16,"Shorts Orgânicos","Veio de um Short (sem anúncio). Contato rápido com o conteúdo, geralmente menos contexto sobre a HOD.","frio","val","Diagnóstico de Carreira"],
+        [17,"Vídeos Longos","Chamada dentro de um vídeo longo. Costuma ser quem mais consumiu conteúdo antes de chegar.","quente","val","Diagnóstico de Carreira"]
       ]}
     ]},
     { id:"tiktok", nome:"TikTok", origens:[
-      { id:"tiktok", nome:"TikTok", icon:"tiktok", linhas:[
-        ["Link da Bio","Formulário Plano 90 Dias"]
+      { id:"tiktok", nome:"TikTok", handle:"Perfil HOD", sub:"", icon:"tiktok", linhas:[
+        [18,"Link da Bio","Link na bio do TikTok, levando para o formulário do Plano 90 Dias.","morno","val","Formulário Plano 90 Dias"]
       ]}
     ]},
     { id:"monetizacao", nome:"Monetização", origens:[
-      { id:"indicacao", nome:"Indicação", icon:"indicacao", linhas:[ ["Cliente indica novo lead","Venda"] ]},
-      { id:"renovacao", nome:"Renovação", icon:"renovacao", linhas:[ ["Base de alunos","Venda"] ]}
+      { id:"indicacao", nome:"Indicação", handle:"", sub:"Monetização", icon:"indicacao", linhas:[
+        [19,"Cliente indica novo lead","Um aluno indicou a pessoa. Já chega com confiança emprestada de quem indicou: vale perguntar e citar o nome.","quente","val","Venda"]
+      ]},
+      { id:"renovacao", nome:"Renovação", handle:"", sub:"Monetização", icon:"renovacao", linhas:[
+        [20,"Base de alunos","Aluno atual ou antigo renovando. Conversa de continuidade, não de apresentação.","cliente","val","Venda"]
+      ]}
     ]}
   ];
 
+  /* ============ RASTREAMENTO: PREENCHA AQUI ============
+     entrada: link onde o lead clica (anúncio, bio, direct, descrição do vídeo...)
+     destino: URL da página em que o lead cai (formulário, landing, curso...)
+     source / medium / campaign / content: UTM oficial. Enquanto source, medium e campaign
+     estiverem vazios, a coluna F mostra a sugestão do padrão (tracejada). */
+  var RASTREAMENTO = {
+    1:  { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    2:  { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    3:  { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    4:  { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    5:  { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    6:  { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    7:  { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    8:  { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    9:  { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    10: { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    11: { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    12: { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    13: { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    14: { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    15: { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    16: { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    17: { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+    18: { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" }
+  };
+
+  // Caminhos que não usam UTM (o rastreio é feito de outra forma)
+  var SEM_UTM = {
+    12:{ tipo:"na",  titulo:"UTM não se aplica", texto:"O destino é a inscrição no canal, sem página de captação. Medir pelas métricas de inscritos do anúncio." },
+    19:{ tipo:"crm", titulo:"Rastreio pelo CRM", texto:"Sem link: registrar Origem = Indicação e o campo \"indicado por\" no cadastro do lead." },
+    20:{ tipo:"crm", titulo:"Rastreio pelo CRM", texto:"Sem link: registrar Origem = Renovação no cadastro do aluno." }
+  };
+
+  // Sugestão de padrão UTM (source, medium, campaign, content). {chaves} = valor variável.
+  var SUGESTAO = {
+    1:["ig-felipemarquesbr","paid","novos-seguidores","{criativo}"],
+    2:["ig-felipemarquesbr","bio","plano-90-dias","link-bio"],
+    3:["ig-felipemarquesbr","dm-boas-vindas","plano-90-dias","novo-seguidor"],
+    4:["ig-felipemarquesbr","manychat","plano-90-dias","{palavra-chave}"],
+    5:["ig-felipemarquesbr","paid","remarketing","{criativo}"],
+    6:["ig-felipemarquesbr","paid","bora","{criativo}"],
+    7:["ig-homeofficedigital","bio","diagnostico","link-bio-1"],
+    8:["ig-homeofficedigital","bio","plano-90-dias","link-bio-2"],
+    9:["ig-homeofficedigital","manychat","diagnostico","{palavra-chave}"],
+    10:["ig-felipemarqueshod","bio","diagnostico","link-bio"],
+    11:["ig-felipemarqueshod","manychat","diagnostico","{palavra-chave}"],
+    13:["youtube","paid","remarketing","{criativo}"],
+    14:["youtube","descricao","diagnostico","{id-do-video}"],
+    15:["youtube","comentario-fixado","curso-gratis","{id-do-video}"],
+    16:["youtube","shorts","diagnostico","{id-do-short}"],
+    17:["youtube","video-longo","diagnostico","{id-do-video}"],
+    18:["tiktok","bio","plano-90-dias","link-bio"]
+  };
+
+  var OBJETIVOS = [
+    ["Formulário Plano 90 Dias","Captar os dados do lead e colocá-lo na fila de qualificação do SDR."],
+    ["Diagnóstico de Carreira","Entender o momento profissional do lead, qualificar e gerar o agendamento com o Closer."],
+    ["Landing BORA","Captar o lead no contexto da campanha BORA, com a oferta dela."],
+    ["Curso Grátis","Entregar valor antes da venda e nutrir o lead até o próximo passo."],
+    ["Inscrição no Canal","Construir audiência. Não gera lead direto: o inscrito volta pelos outros caminhos do YouTube."],
+    ["Venda","Negociação direta com o comercial, sem etapa de captação."]
+  ];
+
+  var TEMPS = [["frio","Frio","--cold"],["morno","Morno","--warm"],["quente","Quente","--hot"],["cliente","Cliente","--client"]];
+  var STATUS = [["ok","Confirmada","--green"],["val","A validar","--gold-ink"]];
+  var TRKS = [["pend","Pendente","--gold-ink"],["def","Definido","--green"],["na","Via CRM / N.A.","--faint"]];
+  var TL = {}; TEMPS.forEach(function(t){ TL[t[0]]=t[1]; });
+  var UTM_KEYS = ["source","medium","campaign","content"];
+
+  var TODAS = [];
+  CANAIS.forEach(function(c){ c.origens.forEach(function(o){ o.linhas.forEach(function(l){
+    var r = { n:l[0], meio:l[1], desc:l[2], temp:l[3], st:l[4], dest:l[5], o:o, c:c,
+      rast: RASTREAMENTO[l[0]] || { entrada:"", destino:"", source:"", medium:"", campaign:"", content:"" },
+      sem: SEM_UTM[l[0]] || null, sug: SUGESTAO[l[0]] || null };
+    r.utmDef = !r.sem && !!(r.rast.source && r.rast.medium && r.rast.campaign);
+    r.trk = r.sem ? "na" : ((r.utmDef && r.rast.destino) ? "def" : "pend");
+    TODAS.push(r);
+  }); }); });
+
   /* ============ ESTADO ============ */
-  var state = { filtro:"todos", q:"", sel:null };
+  var state = { filtro:"todos", q:"", temps:{}, sts:{}, trks:{}, sel:null, view:"det" };
   var $ = function(id){ return document.getElementById(id); };
   var tb = $("tb");
 
-  function norm(s){ return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
+  function norm(s){ return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
   function marcar(txt){
-    if(!state.q) return esc(txt);
-    var n = norm(txt), q = norm(state.q), i = n.indexOf(q);
+    if(!state.q.trim()) return esc(txt);
+    var n = norm(txt), q = norm(state.q.trim()), i = n.indexOf(q);
     if(i<0) return esc(txt);
     return esc(txt.slice(0,i))+"<mark>"+esc(txt.slice(i,i+q.length))+"</mark>"+esc(txt.slice(i+q.length));
   }
   function plural(n,s,p){ return n+" "+(n===1?s:p); }
-
-  function visiveis(){
-    var q = norm(state.q.trim());
-    return CANAIS.filter(function(c){ return state.filtro==="todos" || c.id===state.filtro; }).map(function(c){
-      return { canal:c, origens:c.origens.map(function(o){
-        return { o:o, linhas:o.linhas.filter(function(l){ return !q || norm(l[0]).indexOf(q)>-1; }) };
-      }).filter(function(x){ return x.linhas.length; }) };
-    }).filter(function(c){ return c.origens.length; });
+  function anyOn(obj){ for(var k in obj){ if(obj[k]) return true; } return false; }
+  function utmVals(r){ return r.utmDef ? UTM_KEYS.map(function(k){ return r.rast[k]; }) : (r.sug || []); }
+  function utmString(r){
+    var v = utmVals(r);
+    return UTM_KEYS.map(function(k,i){ return v[i] ? "utm_"+k+"="+v[i] : ""; }).filter(Boolean).join("&");
   }
 
-  /* ============ RENDER ============ */
+  function passa(r, ignorar){
+    var q = norm(state.q.trim());
+    if(state.filtro!=="todos" && r.c.id!==state.filtro) return false;
+    if(q && norm(r.meio).indexOf(q)<0 && norm(r.desc).indexOf(q)<0 && norm(utmVals(r).join(" ")).indexOf(q)<0) return false;
+    if(ignorar!=="temp" && anyOn(state.temps) && !state.temps[r.temp]) return false;
+    if(ignorar!=="st" && anyOn(state.sts) && !state.sts[r.st]) return false;
+    if(ignorar!=="trk" && anyOn(state.trks) && !state.trks[r.trk]) return false;
+    return true;
+  }
+
+  /* ============ CÉLULAS NOVAS ============ */
+  function linkSlot(label, url){
+    var v = url
+      ? '<a class="lk-a mono" href="'+esc(url)+'" target="_blank" rel="noopener" title="'+esc(url)+'">'+svg("ext")+'<span>'+esc(url.replace(/^https?:\/\//,""))+'</span></a>'
+      : '<span class="slot">'+svg("link")+'A mapear</span>';
+    return '<div class="lk-row"><span class="k">'+label+'</span>'+v+'</div>';
+  }
+  function cellLinks(r){
+    if(r.sem && r.sem.tipo==="crm") return '<div class="na">'+svg("minus")+'<span><b>Sem link</b>Entrada direta pelo comercial.</span></div>';
+    return '<div class="lk">'+linkSlot("Entrada", r.rast.entrada)+linkSlot("Destino", r.rast.destino)+'</div>';
+  }
+  function cellUtm(r){
+    if(r.sem) return '<div class="na">'+svg(r.sem.tipo==="crm"?"db":"minus")+'<span><b>'+esc(r.sem.titulo)+'</b>'+esc(r.sem.texto)+'</span></div>';
+    var v = utmVals(r), def = r.utmDef;
+    var rows = UTM_KEYS.map(function(k,i){
+      var val = v[i] || "";
+      var shown = val ? marcar(val).replace(/\{([^}]*)\}/g,'<em>{$1}</em>') : "—";
+      return '<span class="k">'+k+'</span><span class="v'+(val?"":" miss")+'">'+shown+'</span>';
+    }).join("");
+    return '<div class="utm mono '+(def?"def":"sug")+'"><span class="utm-tag">'+(def?"Oficial":"Sugestão")+'</span>'+rows+
+      '<button class="utm-copy" data-copy="'+r.n+'" aria-label="Copiar UTM do caminho '+r.n+'" title="Copiar parâmetros">'+svg("copy")+'</button></div>';
+  }
+
+  /* ============ TABELA ============ */
   function render(){
-    var data = visiveis(), html = "", n = 0, alt = false, origens = 0, destinos = {}, meios = {};
-    data.forEach(function(c){
-      var qtd = c.origens.length;
-      html += '<tr class="group"><td colspan="4"><div class="g">'+svg(c.canal.id)+'<b>'+c.canal.nome+'</b>'+plural(qtd,"origem","origens")+'</div></td></tr>';
-      c.origens.forEach(function(x){
+    var html = "", count = 0, alt = false, origens = 0;
+    CANAIS.forEach(function(c){
+      var blocos = c.origens.map(function(o){
+        return { o:o, rows:TODAS.filter(function(r){ return r.o===o && passa(r); }) };
+      }).filter(function(b){ return b.rows.length; });
+      if(!blocos.length) return;
+      html += '<tr class="group"><td colspan="7"><div class="g">'+svg(c.id)+'<b>'+c.nome+'</b>'+plural(blocos.length,"origem","origens")+'</div></td></tr>';
+      blocos.forEach(function(b){
         origens++;
-        x.linhas.forEach(function(l, i){
-          n++; alt = !alt; destinos[l[1]] = 1; meios[x.o.id+"|"+l[0]] = 1;
-          html += '<tr class="row enter'+(alt?" alt":"")+'" data-o="'+x.o.id+'" style="animation-delay:'+Math.min(n*14,300)+'ms">';
-          html += '<td class="rn">'+n+'</td>';
+        b.rows.forEach(function(r, i){
+          count++; alt = !alt;
+          html += '<tr class="row enter'+(alt?" alt":"")+'" data-o="'+b.o.id+'" data-d="'+esc(r.dest)+'" style="animation-delay:'+Math.min(count*14,280)+'ms">';
+          html += '<td class="rn stk1 mono">'+String(r.n).padStart(2,"0")+'</td>';
           if(i===0){
-            html += '<td class="origem" rowspan="'+x.linhas.length+'" data-o="'+x.o.id+'" tabindex="0" role="button" aria-label="Destacar '+esc(x.o.nome)+'">'+
-              '<div class="cell"><span class="o-ic">'+svg(x.o.icon)+'</span><span><div class="o-nm">'+esc(x.o.nome)+'</div>'+
-              '<div class="o-meta">'+plural(x.linhas.length,"caminho","caminhos")+'</div></span></div></td>';
+            html += '<td class="origem stk2" rowspan="'+b.rows.length+'" data-o="'+b.o.id+'" tabindex="0" role="button" aria-label="Destacar '+esc(b.o.nome)+'">'+
+              '<div class="cell"><span class="o-ic">'+svg(b.o.icon)+'</span><span>'+
+              '<div class="o-nm">'+esc(b.o.nome)+'</div>'+
+              (b.o.handle || b.o.sub ? '<div class="o-handle">'+esc([b.o.handle,b.o.sub].filter(Boolean).join(" · "))+'</div>' : '')+
+              '<div class="o-meta">'+plural(b.rows.length,"caminho","caminhos")+'</div></span></div></td>';
           }
-          html += '<td class="meio"><div class="cell"><span class="dot"></span><span class="txt">'+marcar(l[0])+'</span></div></td>';
-          html += '<td class="dest"><div class="cell"><span class="pill">'+esc(l[1])+'</span></div></td>';
+          html += '<td class="meio data"><div class="cell"><span class="dot"></span><span><div class="m-top"><span class="m-nm">'+marcar(r.meio)+'</span>'+
+            (r.st==="ok" ? '<span class="s ok">'+svg("check")+'Confirmada</span>' : '<span class="s val">'+svg("clock")+'A validar</span>')+
+            '</div><div class="m-desc">'+marcar(r.desc)+'</div></span></div></td>';
+          html += '<td class="temp data"><div class="cell"><span class="t '+r.temp+'">'+TL[r.temp]+'</span></div></td>';
+          html += '<td class="dest data"><div class="cell"><span class="pill">'+esc(r.dest)+'</span></div></td>';
+          html += '<td class="links data"><div class="cell">'+cellLinks(r)+'</div></td>';
+          html += '<td class="utmc data"><div class="cell">'+cellUtm(r)+'</div></td>';
           html += '</tr>';
         });
       });
     });
-    if(!n){
-      html = '<tr class="empty"><td colspan="4"><div class="box"><b>Nenhum meio encontrado para “'+esc(state.q)+'”</b>'+
-        'Tente outro termo ou busque em todos os canais.<br><button id="emptyReset">Limpar busca e filtro</button></div></td></tr>';
+    if(!count){
+      html = '<tr class="empty"><td colspan="7"><div class="box"><b>Nenhum caminho encontrado com esses filtros</b>Tente outro termo ou limpe os filtros.<br><button id="emptyReset">Limpar busca e filtros</button></div></td></tr>';
     }
     tb.innerHTML = html;
-    var r = $("emptyReset"); if(r) r.addEventListener("click", function(){ setQ(""); setFiltro("todos"); });
-
-    $("summary").textContent = n ? plural(n,"caminho","caminhos")+" em "+plural(origens,"origem","origens")+(state.q?" para “"+state.q+"”":"") : "";
-    if(state.sel && !tb.querySelector('td.origem[data-o="'+state.sel+'"]')) state.sel = null;
+    var r = $("emptyReset"); if(r) r.addEventListener("click", resetTudo);
+    $("summary").textContent = count ? plural(count,"caminho","caminhos")+" em "+plural(origens,"origem","origens")+(count<TODAS.length?" · de "+TODAS.length+" no total":"") : "";
+    renderChips();
     applySel();
   }
 
+  /* ============ CHIPS DE FILTRO ============ */
+  function chip(list, key, stKey, grupo){
+    var el = $(grupo), lb = el.querySelector(".lb").outerHTML, obj = state[stKey];
+    el.innerHTML = lb + list.map(function(t){
+      var n = TODAS.filter(function(r){ return r[key]===t[0] && passa(r, key); }).length;
+      var soft = t[2]==="--gold-ink" ? "--gold-soft" : (t[2]==="--green" ? "--green-soft" : (t[2]==="--faint" ? "--surface-2" : t[2]+"-soft"));
+      return '<button class="fchip" data-k="'+t[0]+'" aria-pressed="'+(!!obj[t[0]])+'" style="--dot:var('+t[2]+');--soft:var('+soft+')">'+t[1]+' <span class="c mono">'+n+'</span></button>';
+    }).join("");
+    el.querySelectorAll(".fchip").forEach(function(b){
+      b.addEventListener("click", function(){ var k = b.getAttribute("data-k"); obj[k] = !obj[k]; render(); });
+    });
+  }
+  function renderChips(){ chip(TEMPS,"temp","temps","fTemp"); chip(STATUS,"st","sts","fStatus"); chip(TRKS,"trk","trks","fTrk"); }
+
+  /* ============ OBJETIVOS ============ */
+  function renderDests(){
+    $("dests").innerHTML = OBJETIVOS.map(function(d){
+      var rows = TODAS.filter(function(r){ return r.dest===d[0]; });
+      var temps = {}; rows.forEach(function(r){ temps[r.temp]=(temps[r.temp]||0)+1; });
+      return '<button class="dcard" data-d="'+esc(d[0])+'" aria-pressed="false">'+
+        '<div class="top2"><b>'+esc(d[0])+'</b><span class="n mono">'+plural(rows.length,"caminho","caminhos")+'</span></div>'+
+        '<p>'+esc(d[1])+'</p>'+
+        '<div class="temps">'+TEMPS.filter(function(t){ return temps[t[0]]; }).map(function(t){ return '<span class="t '+t[0]+'">'+t[1]+' '+temps[t[0]]+'</span>'; }).join("")+'</div></button>';
+    }).join("");
+    $("dests").querySelectorAll(".dcard").forEach(function(b){
+      b.addEventListener("click", function(){
+        toggleSel({ t:"d", id:b.getAttribute("data-d") });
+        if(state.sel) $("tbl").scrollIntoView({ behavior:"smooth", block:"start" });
+      });
+    });
+  }
+
+  /* ============ PADRÃO UTM (seção) ============ */
+  function renderParams(){
+    var P = [
+      ["utm_source","Onde","Perfil ou canal de origem.","ig-felipemarquesbr, youtube, tiktok"],
+      ["utm_medium","Como","Mecanismo que gerou o clique.","paid, bio, manychat, descricao"],
+      ["utm_campaign","Para quê","Oferta ou objetivo do caminho.","plano-90-dias, diagnostico, bora"],
+      ["utm_content","Qual","Peça específica: criativo, post ou vídeo.","{palavra-chave}, {id-do-video}"]
+    ];
+    $("params").innerHTML = P.map(function(p){
+      return '<div class="param"><code>'+p[0]+'</code><b>'+p[1]+'</b><p>'+p[2]+'<br><span class="mono" style="color:var(--faint)">'+esc(p[3])+'</span></p></div>';
+    }).join("");
+    var ex = TODAS.filter(function(r){ return r.n===4; })[0], v = utmVals(ex);
+    $("example").innerHTML = '<span style="color:var(--faint)">Exemplo · caminho 04 (ManyChat do Felipe)</span><br>'+
+      '<span class="h">https://{formulario-plano-90-dias}</span>?'+
+      UTM_KEYS.map(function(k,i){ return '<span class="p">utm_'+k+'</span>='+esc(v[i]).replace(/\{([^}]*)\}/g,'<em>{$1}</em>'); }).join("&amp;");
+  }
+
+  /* ============ STATS ============ */
   function renderStats(){
-    var caminhos = 0, destinos = {}, origens = 0;
-    CANAIS.forEach(function(c){ c.origens.forEach(function(o){ origens++; o.linhas.forEach(function(l){ caminhos++; destinos[l[1]]=1; }); }); });
+    var origens = 0, dest = {}, ok = 0, rastreavel = 0, definidos = 0;
+    CANAIS.forEach(function(c){ origens += c.origens.length; });
+    TODAS.forEach(function(r){
+      dest[r.dest]=1; if(r.st==="ok") ok++;
+      if(r.trk!=="na"){ rastreavel++; if(r.trk==="def") definidos++; }
+    });
+    var p1 = Math.round(ok/TODAS.length*100), p2 = Math.round(definidos/rastreavel*100);
     $("stats").innerHTML =
       '<div class="stat"><div class="v">'+origens+'</div><div class="l">Origens</div></div>'+
-      '<div class="stat green"><div class="v">'+caminhos+'</div><div class="l">Caminhos</div></div>'+
-      '<div class="stat gold"><div class="v">'+Object.keys(destinos).length+'</div><div class="l">Destinos</div></div>';
+      '<div class="stat green"><div class="v">'+TODAS.length+'</div><div class="l">Caminhos</div></div>'+
+      '<div class="stat gold"><div class="v">'+Object.keys(dest).length+'</div><div class="l">Objetivos</div></div>'+
+      '<div class="stat prog"><div class="v">'+ok+'<small> / '+TODAS.length+'</small></div><div class="l">Descrições confirmadas</div><div class="bar"><i style="width:'+p1+'%"></i></div></div>'+
+      '<div class="stat prog"><div class="v">'+definidos+'<small> / '+rastreavel+'</small></div><div class="l">Caminhos rastreáveis (link + UTM)</div><div class="bar gold"><i style="width:'+p2+'%"></i></div></div>';
   }
 
   /* ============ SELEÇÃO / HOVER ============ */
   function nomeOrigem(id){ var n=""; CANAIS.forEach(function(c){ c.origens.forEach(function(o){ if(o.id===id) n=o.nome; }); }); return n; }
   function applySel(){
-    tb.classList.toggle("has-sel", !!state.sel);
-    tb.querySelectorAll("tr.row").forEach(function(tr){ tr.classList.toggle("sel", tr.getAttribute("data-o")===state.sel); });
-    tb.querySelectorAll("td.origem").forEach(function(td){
-      var on = td.getAttribute("data-o")===state.sel;
-      td.classList.toggle("sel", on); td.setAttribute("aria-pressed", on?"true":"false");
+    var s = state.sel;
+    tb.classList.toggle("has-sel", !!s);
+    tb.classList.toggle("sel-d", !!(s && s.t==="d"));
+    var vivas = {};
+    tb.querySelectorAll("tr.row").forEach(function(tr){
+      var on = !!s && (s.t==="o" ? tr.getAttribute("data-o")===s.id : tr.getAttribute("data-d")===s.id);
+      tr.classList.toggle("sel", on);
+      if(on) vivas[tr.getAttribute("data-o")] = 1;
     });
-    $("selTag").classList.toggle("show", !!state.sel);
-    if(state.sel) $("selName").textContent = nomeOrigem(state.sel);
+    tb.querySelectorAll("td.origem").forEach(function(td){
+      var id = td.getAttribute("data-o"), on = !!s && s.t==="o" && s.id===id;
+      td.classList.toggle("sel", on);
+      td.classList.toggle("live", !!vivas[id]);
+      td.setAttribute("aria-pressed", on?"true":"false");
+    });
+    document.querySelectorAll(".dcard").forEach(function(b){ b.setAttribute("aria-pressed", !!s && s.t==="d" && s.id===b.getAttribute("data-d") ? "true":"false"); });
+    var tag = $("selTag");
+    tag.classList.toggle("show", !!s);
+    tag.classList.toggle("gold", !!(s && s.t==="d"));
+    if(s) $("selName").textContent = s.t==="o" ? nomeOrigem(s.id) : "Objetivo: "+s.id;
   }
-  function toggleSel(id){ state.sel = state.sel===id ? null : id; applySel(); }
+  function toggleSel(s){
+    state.sel = (state.sel && state.sel.t===s.t && state.sel.id===s.id) ? null : s;
+    applySel();
+  }
+
+  var toastT = null;
+  function toast(msg){ var t = $("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(function(){ t.classList.remove("show"); }, 1800); }
+  function copiar(txt){
+    function fallback(){
+      var ta = document.createElement("textarea"); ta.value = txt; ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try{ ok = document.execCommand("copy"); }catch(e){}
+      document.body.removeChild(ta);
+      toast(ok ? "UTM copiada" : "Não foi possível copiar");
+    }
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(function(){ toast("UTM copiada"); }, fallback); }
+      else fallback();
+    }catch(e){ fallback(); }
+  }
 
   tb.addEventListener("click", function(e){
-    var td = e.target.closest("td.origem"); if(td) toggleSel(td.getAttribute("data-o"));
+    var cp = e.target.closest(".utm-copy");
+    if(cp){ var n = +cp.getAttribute("data-copy"); copiar("?"+utmString(TODAS.filter(function(r){ return r.n===n; })[0])); return; }
+    var td = e.target.closest("td.origem"); if(td) toggleSel({ t:"o", id:td.getAttribute("data-o") });
   });
   tb.addEventListener("keydown", function(e){
     var td = e.target.closest("td.origem");
-    if(td && (e.key==="Enter" || e.key===" ")){ e.preventDefault(); toggleSel(td.getAttribute("data-o")); }
+    if(td && (e.key==="Enter" || e.key===" ")){ e.preventDefault(); toggleSel({ t:"o", id:td.getAttribute("data-o") }); }
   });
   var hoverTr = null;
   function setHover(tr){
@@ -375,8 +778,9 @@
   tb.addEventListener("mouseleave", function(){ setHover(null); });
   $("selClear").addEventListener("click", function(){ state.sel=null; applySel(); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape" && state.sel){ state.sel=null; applySel(); } });
+  $("scroll").addEventListener("scroll", function(){ this.classList.toggle("scrolled", this.scrollLeft>4); });
 
-  /* ============ FILTRO ============ */
+  /* ============ FILTRO DE CANAL ============ */
   var seg = $("seg");
   [["todos","Todos"],["instagram","Instagram"],["youtube","YouTube"],["tiktok","TikTok"],["monetizacao","Monetização"]].forEach(function(f){
     var b = document.createElement("button");
@@ -395,17 +799,33 @@
     moveInd(); render();
   }
 
+  /* ============ VISUALIZAÇÃO ============ */
+  document.querySelectorAll(".view-toggle button").forEach(function(b){
+    b.addEventListener("click", function(){
+      state.view = b.getAttribute("data-v");
+      document.querySelectorAll(".view-toggle button").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); });
+      $("tbl").classList.toggle("compact", state.view==="comp");
+      try{ localStorage.setItem("hod-matriz-view", state.view); }catch(e){}
+    });
+  });
+
   /* ============ BUSCA ============ */
   var q = $("q"), t = null;
-  function setQ(v){ q.value = v; state.q = v; $("qClear").classList.toggle("show", !!v); render(); }
+  function setQ(v){ q.value = v; state.q = v; $("qClear").classList.toggle("show", !!v); }
   q.addEventListener("input", function(){
     $("qClear").classList.toggle("show", !!q.value);
     clearTimeout(t); t = setTimeout(function(){ state.q = q.value; render(); }, 120);
   });
-  $("qClear").addEventListener("click", function(){ setQ(""); q.focus(); });
+  $("qClear").addEventListener("click", function(){ setQ(""); render(); q.focus(); });
+
+  function resetTudo(){ setQ(""); state.temps = {}; state.sts = {}; state.trks = {}; setFiltro("todos"); }
 
   /* ============ INIT ============ */
-  renderStats(); render();
+  renderStats(); renderDests(); renderParams(); render();
+  try{
+    var v = localStorage.getItem("hod-matriz-view");
+    if(v==="comp"){ var btn = document.querySelector('.view-toggle [data-v="comp"]'); if(btn) btn.click(); }
+  }catch(e){}
   requestAnimationFrame(moveInd);
   window.addEventListener("resize", moveInd);
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(moveInd);
